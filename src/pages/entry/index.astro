@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/common/PageHero.astro';
+import { company } from '../../data/company';
+import { jobs } from '../../data/jobs';
+---
+<BaseLayout title="応募する｜OMG株式会社 採用サイト" description="OMG株式会社のドライバー・倉庫業務への応募フォームと電話連絡先です。">
+  <PageHero label="ENTRY" title="応募する" lead="ご応募・仕事内容についてのご質問を受け付けています。" />
+  <section class="section-space bg-white">
+    <div class="site-container grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
+      <aside><p class="section-kicker">CONTACT</p><h2 class="section-title text-[clamp(2rem,4vw,3rem)]">お電話でのご応募</h2><p class="body-copy mt-5">採用担当へ「採用サイトを見た」とお伝えください。</p><a class="mt-6 block text-3xl font-black tracking-tight text-primary no-underline" href={`tel:${company.phone.replaceAll('-', '')}`}>{company.phone}</a><p class="mt-3 text-sm text-slate-500">担当：丹羽</p></aside>
+      <div class="rounded-card border border-line bg-soft p-5 shadow-card sm:p-8">
+        <h2 class="text-2xl font-black">応募フォーム</h2>
+        <p class="mt-3 text-sm leading-7 text-slate-600">必須項目をご入力ください。現在、送信先連携は準備中です。お急ぎの場合はお電話をご利用ください。</p>
+        <form class="mt-8 grid gap-6" data-entry-form novalidate>
+          <div><label class="mb-2 block font-black" for="name">氏名 <span class="text-primary">必須</span></label><input class="min-h-14 w-full rounded-xl border border-line bg-white px-4" id="name" name="name" type="text" autocomplete="name" maxlength="80" required /></div>
+          <div><label class="mb-2 block font-black" for="kana">ふりがな <span class="text-primary">必須</span></label><input class="min-h-14 w-full rounded-xl border border-line bg-white px-4" id="kana" name="kana" type="text" maxlength="80" required /></div>
+          <div class="grid gap-6 sm:grid-cols-2"><div><label class="mb-2 block font-black" for="tel">電話番号 <span class="text-primary">必須</span></label><input class="min-h-14 w-full rounded-xl border border-line bg-white px-4" id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" pattern="[0-9()+ -]{10,20}" required /></div><div><label class="mb-2 block font-black" for="email">メールアドレス <span class="text-primary">必須</span></label><input class="min-h-14 w-full rounded-xl border border-line bg-white px-4" id="email" name="email" type="email" autocomplete="email" maxlength="254" required /></div></div>
+          <div><label class="mb-2 block font-black" for="job">希望職種 <span class="text-primary">必須</span></label><select class="min-h-14 w-full rounded-xl border border-line bg-white px-4" id="job" name="job" required><option value="">選択してください</option>{jobs.filter((job) => job.isOpen).map((job) => <option value={job.title}>{job.title}</option>)}</select></div>
+          <div><label class="mb-2 block font-black" for="license">保有免許・資格</label><input class="min-h-14 w-full rounded-xl border border-line bg-white px-4" id="license" name="license" type="text" maxlength="200" /></div>
+          <fieldset><legend class="mb-2 font-black">希望連絡方法</legend><div class="flex flex-wrap gap-5"><label class="flex min-h-11 items-center gap-2"><input name="contactMethod" type="radio" value="電話" checked /> 電話</label><label class="flex min-h-11 items-center gap-2"><input name="contactMethod" type="radio" value="メール" /> メール</label></div></fieldset>
+          <div><label class="mb-2 block font-black" for="message">自由記入欄</label><textarea class="min-h-40 w-full rounded-xl border border-line bg-white p-4" id="message" name="message" maxlength="1000"></textarea></div>
+          <label class="flex items-start gap-3 rounded-xl bg-white p-4"><input class="mt-2" name="privacy" type="checkbox" required /><span>個人情報の取り扱いに同意する <span class="text-primary">必須</span><small class="block text-slate-500">※ 個人情報保護方針は公開前にリンク設定が必要です。</small></span></label>
+          <button class="button-primary w-full disabled:cursor-not-allowed disabled:opacity-60" type="submit">入力内容を確認する</button>
+          <p class="hidden rounded-xl bg-sky p-4 font-bold" role="status" tabindex="-1" data-form-status></p>
+        </form>
+      </div>
+    </div>
+  </section>
+  <script>
+    /**
+     * 未接続のフォームが送信済みに見えないようにし、入力チェック後に準備中であることを案内する。
+     * 送信先確定後は Cloudflare Workers への処理へ置き換える。
+     */
+    const form = document.querySelector<HTMLFormElement>('[data-entry-form]');
+    const status = document.querySelector<HTMLElement>('[data-form-status]');
+    form?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      if (!status) return;
+      status.textContent = '入力ありがとうございます。現在オンライン送信は準備中です。お手数ですが、お急ぎの場合はお電話でご応募ください。';
+      status.classList.remove('hidden');
+      status.focus();
+    });
+  </script>
+</BaseLayout>

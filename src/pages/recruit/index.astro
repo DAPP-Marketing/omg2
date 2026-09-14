@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/common/PageHero.astro';
+import EntryCTA from '../../components/common/EntryCTA.astro';
+import { jobs } from '../../data/jobs';
+import { recruitConditions, selectionFlow } from '../../data/recruit';
+---
+<BaseLayout title="ドライバー・倉庫業務の募集要項｜OMG株式会社" description="愛知県一宮市のOMG株式会社が募集する大型・中型・小型ドライバー、倉庫業務管理者の仕事内容と募集条件です。">
+  <PageHero label="RECRUIT" title="仕事・募集要項" lead="それぞれの仕事と、現在公開している募集条件をご案内します。" />
+
+  <section class="section-space bg-white" aria-labelledby="jobs-detail-title">
+    <div class="site-container"><p class="section-kicker">JOBS</p><h2 id="jobs-detail-title" class="section-title">募集職種と仕事内容</h2>
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        {jobs.filter((job) => job.isOpen).map((job) => <article class="rounded-card border border-line bg-white p-7 shadow-card md:p-9"><span class="inline-flex rounded-full bg-sky px-3 py-1 text-sm font-black text-primary">募集中</span><h3 class="mt-4 text-2xl font-black">{job.title}</h3><p class="mt-3 text-slate-600">{job.summary}</p><ul class="mt-5 grid gap-2 pl-5 text-slate-600">{job.duties.map((duty) => <li>{duty}</li>)}</ul><p class="mt-6 border-t border-line pt-5"><strong class="mr-3 text-primary">必要資格</strong>{job.requiredLicense}</p></article>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-space bg-soft" aria-labelledby="conditions-title">
+    <div class="site-container"><p class="section-kicker">CONDITIONS</p><h2 id="conditions-title" class="section-title">給与・待遇・働き方</h2><p class="body-copy mt-5">職種によって条件が異なります。最新の募集状況と詳細は応募時にご確認ください。</p>
+      <div class="mt-10 grid gap-6">{recruitConditions.map((item) => <article class="overflow-hidden rounded-card border border-line bg-white shadow-card"><h3 class="bg-navy px-6 py-5 text-xl font-black text-white md:px-8">{item.jobTitle}</h3><dl class="grid sm:grid-cols-2"><div class="border-b border-line p-5 sm:border-r"><dt class="font-black text-primary">雇用形態</dt><dd class="mt-1">{item.employmentType}</dd></div><div class="border-b border-line p-5"><dt class="font-black text-primary">給与</dt><dd class="mt-1">{item.salary}</dd></div><div class="border-b border-line p-5 sm:border-r"><dt class="font-black text-primary">勤務時間</dt><dd class="mt-1">{item.workingHours}</dd></div><div class="border-b border-line p-5"><dt class="font-black text-primary">休日</dt><dd class="mt-1">{item.holidays}</dd></div><div class="border-b border-line p-5 sm:border-b-0 sm:border-r"><dt class="font-black text-primary">諸手当</dt><dd class="mt-1">{item.allowances}</dd></div><div class="p-5"><dt class="font-black text-primary">福利厚生</dt><dd class="mt-1">{item.benefits}</dd></div></dl></article>)}</div>
+    </div>
+  </section>
+
+  <section class="section-space bg-white" aria-labelledby="flow-title">
+    <div class="site-container"><p class="section-kicker">FLOW</p><h2 id="flow-title" class="section-title">選考の流れ</h2><ol class="mt-10 grid gap-4 md:grid-cols-3">{selectionFlow.map((step, index) => <li class="rounded-card border border-line p-6"><span class="text-sm font-black text-primary">STEP {String(index + 1).padStart(2, '0')}</span><p class="mt-3 text-lg font-black">{step}</p></li>)}</ol><p class="body-copy mt-6">面接時は、履歴書（写真添付）、運転免許証、関係資格者証をご持参ください。</p></div>
+  </section>
+  <EntryCTA />
+</BaseLayout>

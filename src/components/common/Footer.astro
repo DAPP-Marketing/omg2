@@ -1,0 +1,21 @@
+---
+/**
+ * 全ページ共通のフッター。
+ * 会社情報は src/data/company.ts の確認済みデータを参照する。
+ */
+import { company } from '../../data/company';
+import { navigation } from '../../data/navigation';
+---
+<footer class="bg-navy text-white">
+  <div class="site-container grid gap-10 py-14 md:grid-cols-[1fr_auto] md:items-end md:py-20">
+    <div>
+      <a href="/" class="inline-flex items-center gap-3 text-white no-underline" aria-label="OMG株式会社 採用サイト トップ"><span class="grid size-11 place-items-center rounded-full bg-primary text-xl font-black">O</span><span class="text-2xl font-black tracking-tight">OMG <small class="text-sm tracking-[0.12em]">RECRUIT</small></span></a>
+      <p class="mt-6 text-sm leading-7 text-white/70">{company.name}<br />{company.address}</p>
+      <p class="mt-3"><a class="text-lg font-black text-white no-underline" href={`tel:${company.phone.replaceAll('-', '')}`}>TEL {company.phone}</a></p>
+    </div>
+    <nav class="grid grid-cols-2 gap-x-8 gap-y-3 text-sm md:text-right" aria-label="フッターナビゲーション">
+      {navigation.map((item) => <a class="text-white/80 no-underline hover:text-white" href={item.href}>{item.label}</a>)}
+    </nav>
+  </div>
+  <div class="border-t border-white/15 py-5 text-center text-xs text-white/55">© {new Date().getFullYear()} OMG株式会社</div>
+</footer>
