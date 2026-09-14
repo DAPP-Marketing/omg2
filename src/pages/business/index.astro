@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/common/PageHero.astro';
+import ContactCTA from '../../components/common/ContactCTA.astro';
+import { businesses } from '../../data/business';
+---
+<BaseLayout title="事業内容｜OMG株式会社" description="OMG株式会社のトラック輸送事業と物流事業をご紹介します。貸切チャーター、定期便、ルート配送、倉庫内作業に対応します。">
+  <PageHero label="BUSINESS" title="事業内容" lead="トラック輸送と倉庫物流。2つの事業で、お客様の物流を支えます。" />
+  {businesses.map((business, businessIndex) => (
+    <section class:list={['section-space', businessIndex % 2 === 0 ? 'bg-white' : 'bg-soft']} aria-labelledby={`business-${business.number}`}>
+      <div class="site-container" data-reveal>
+        <div class="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+          <div class:list={[businessIndex % 2 === 1 && 'md:order-2']}><p class="section-kicker">{business.number} SERVICE</p><h2 id={`business-${business.number}`} class="section-title">{business.title}</h2><p class="body-copy mt-6">{business.lead}</p></div>
+          <div class:list={['photo-placeholder min-h-[22rem]', businessIndex % 2 === 1 && 'md:order-1']} role="img" aria-label={`${business.title}の写真 差し替え予定`}><div class="photo-placeholder__inner"><span class="photo-placeholder__icon" aria-hidden="true">＋</span><span class="photo-placeholder__label">{business.title} 写真</span></div></div>
+        </div>
+        <div class="mt-10 grid gap-5 md:grid-cols-2">{business.services.map((service) => <article class="rounded-card border border-line bg-white p-7 shadow-card"><h3 class="text-xl font-black">{service.title}</h3><p class="mt-3 text-slate-600">{service.description}</p></article>)}</div>
+      </div>
+    </section>
+  ))}
+  <ContactCTA />
+</BaseLayout>

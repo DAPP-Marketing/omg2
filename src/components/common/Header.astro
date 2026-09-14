@@ -7,20 +7,20 @@ import { navigation } from '../../data/navigation';
 ---
 <header class="sticky top-0 z-50 border-b border-line/80 bg-white/95 backdrop-blur">
   <div class="site-container flex h-[4.75rem] items-center justify-between gap-4">
-    <a href="/" class="flex items-center gap-2.5 no-underline" aria-label="OMG株式会社 採用サイト トップ">
+    <a href="/" class="flex items-center gap-2.5 no-underline" aria-label="OMG株式会社 トップ">
       <span class="grid size-10 place-items-center rounded-full bg-primary text-lg font-black text-white">O</span>
-      <span class="leading-tight"><strong class="block text-xl font-black tracking-tight text-navy">OMG</strong><span class="block text-[0.7rem] font-bold tracking-[0.12em] text-slate-500">RECRUIT</span></span>
+      <span class="leading-tight"><strong class="block text-xl font-black tracking-tight text-navy">OMG</strong><span class="block text-[0.7rem] font-bold tracking-[0.12em] text-slate-500">LOGISTICS</span></span>
     </a>
     <nav class="hidden items-center gap-7 lg:flex" aria-label="グローバルナビゲーション">
       {navigation.map((item) => <a class="text-[0.9375rem] font-bold text-navy no-underline transition-colors hover:text-primary" href={item.href}>{item.label}</a>)}
-      <a class="button-primary min-h-12 px-6" href="/entry/">応募する <span aria-hidden="true">→</span></a>
+      <a class="button-primary min-h-12 px-6" href="/contact/">お問い合わせ <span aria-hidden="true">→</span></a>
     </nav>
     <details class="group lg:hidden">
       <summary class="grid min-h-12 min-w-12 cursor-pointer place-items-center rounded-full border border-line bg-white font-bold" aria-label="メニューを開く"><span class="text-sm group-open:hidden">MENU</span><span class="hidden text-xl group-open:block" aria-hidden="true">×</span></summary>
       <div class="fixed inset-x-0 top-[4.75rem] h-[calc(100dvh-4.75rem)] border-t border-line bg-white px-5 py-8">
         <nav class="site-container grid gap-2" aria-label="モバイルナビゲーション">
           {navigation.map((item) => <a class="flex min-h-14 items-center justify-between border-b border-line text-lg font-bold text-navy no-underline" href={item.href}>{item.label}<span class="text-primary" aria-hidden="true">→</span></a>)}
-          <a class="button-primary mt-6" href="/entry/">応募する <span aria-hidden="true">→</span></a>
+          <a class="button-primary mt-6" href="/contact/">お問い合わせ <span aria-hidden="true">→</span></a>
         </nav>
       </div>
     </details>

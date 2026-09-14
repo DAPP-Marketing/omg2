@@ -1,0 +1,7 @@
+---
+/** 公式サイトで確認できたお知らせを表示する。 */
+import { news } from '../../data/news';
+---
+<section class="section-space bg-soft" aria-labelledby="news-title">
+  <div class="site-container grid gap-8 md:grid-cols-[0.55fr_1.45fr] md:gap-14" data-reveal><div><p class="section-kicker">04 NEWS</p><h2 id="news-title" class="section-title">お知らせ</h2></div><div class="overflow-hidden rounded-card border border-line bg-white shadow-card">{news.map((item) => <article class="grid gap-2 border-b border-line p-6 last:border-b-0 sm:grid-cols-[7rem_1fr]"><time class="font-black text-primary">{item.date}</time><p class="font-bold">{item.title}</p></article>)}</div></div>
+</section>

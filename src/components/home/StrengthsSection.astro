@@ -1,0 +1,9 @@
+---
+/** OMG株式会社の事業上の強みを、確認済み情報から簡潔に示す。 */
+import { strengths } from '../../data/business';
+---
+<section class="section-space bg-sky" aria-labelledby="strengths-title">
+  <div class="site-container" data-reveal><p class="section-kicker">02 OUR STRENGTHS</p><h2 id="strengths-title" class="section-title">物流に、まっすぐ向き合う。</h2>
+    <div class="mt-10 grid gap-5 md:grid-cols-3">{strengths.map((strength, index) => <article class="rounded-card bg-white p-7 shadow-card md:p-8"><span class="text-4xl font-black text-primary">{String(index + 1).padStart(2, '0')}</span><h3 class="mt-5 text-2xl font-black">{strength.title}</h3><p class="mt-4 text-slate-600">{strength.description}</p></article>)}</div>
+  </div>
+</section>

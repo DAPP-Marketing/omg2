@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/common/PageHero.astro';
-import EntryCTA from '../../components/common/EntryCTA.astro';
+import ContactCTA from '../../components/common/ContactCTA.astro';
 import { jobs } from '../../data/jobs';
 import { recruitConditions, selectionFlow } from '../../data/recruit';
 ---
@@ -25,5 +25,5 @@ import { recruitConditions, selectionFlow } from '../../data/recruit';
   <section class="section-space bg-white" aria-labelledby="flow-title">
     <div class="site-container"><p class="section-kicker">FLOW</p><h2 id="flow-title" class="section-title">選考の流れ</h2><ol class="mt-10 grid gap-4 md:grid-cols-3">{selectionFlow.map((step, index) => <li class="rounded-card border border-line p-6"><span class="text-sm font-black text-primary">STEP {String(index + 1).padStart(2, '0')}</span><p class="mt-3 text-lg font-black">{step}</p></li>)}</ol><p class="body-copy mt-6">面接時は、履歴書（写真添付）、運転免許証、関係資格者証をご持参ください。</p></div>
   </section>
-  <EntryCTA />
+  <ContactCTA />
 </BaseLayout>
